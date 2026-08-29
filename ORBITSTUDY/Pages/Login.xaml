@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             x:Class="ORBITSTUDY.Pages.Login"
+             Title="HomePage"
+             Shell.TitleColor="Transparent"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+    <skia:SKLottieView
+            Source="animated_background.json"
+            RepeatCount="-1"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"/>
+
+    <VerticalStackLayout
+             VerticalOptions="Center"
+             HorizontalOptions="Center"
+             Margin="14">
+
+            <Grid ColumnDefinitions="Auto, 15" ColumnSpacing="5">
+                <Label 
+                    Text="Welcome to ORBIT"
+                    FontAttributes="Bold"
+                    TextColor="#5B8CFF"
+                     Grid.Column="0"/>
+
+                <Image Source="nave_icon.png"
+                        Grid.Column="1"
+                        WidthRequest="15"
+                        HeightRequest="15"/>
+            </Grid>
+
+            <Grid ColumnDefinitions="Auto, 15" ColumnSpacing="5">
+                <Label
+                     Grid.Column="0"
+                     Text="Your Best Friend to Study"          
+                     TextColor="LightGrey"/>
+
+                <Image Source="star_icon.png"
+                        Grid.Column="1"
+                        WidthRequest="15"
+                        HeightRequest="15"/>
+            </Grid>
+
+            <Grid
+                 RowDefinitions="Auto, Auto"
+                 ColumnDefinitions="Auto,*"
+                 ColumnSpacing="10"
+                 VerticalOptions="Center">
+
+                <Label
+                     Grid.Row="0"
+                     Grid.Column="0"
+                     Text="Username:"
+                     FontFamily="SpaceGroteskBold"
+                     TextColor="#5B8CFF"
+                     VerticalOptions="Center"/>
+
+                <Entry
+                     Grid.Row="0"
+                     Grid.Column="1"
+                     Placeholder="Insert username"
+                     PlaceholderColor="LightGray"
+                     TextColor="LightGray"
+                     VerticalOptions="Center" 
+                     x:Name="txt_username"/>
+
+                <Label
+                     Grid.Row="1"
+                     Grid.Column="0"
+                     Text="Password:"
+                     FontFamily="SpaceGroteskBold"
+                     TextColor="#5B8CFF"
+                     VerticalOptions="Center" />
+
+                <Entry
+                     Grid.Row="1"
+                     Grid.Column="1"
+                     Placeholder="Insert password"
+                     PlaceholderColor="LightGray"
+                     TextColor="LightGray"
+                     VerticalOptions="Center" 
+                     x:Name="txt_password"/>
+
+            </Grid>
+            <!-- ==================== BUTTONS ==================== -->
+            <Grid ColumnDefinitions="Auto, Auto" Margin="0,20,0,0" ColumnSpacing="10">
+                <Button Text="Signin"
+                         BackgroundColor="#5B8CFF"
+                         WidthRequest="85"
+                         HeightRequest="20"
+                         Grid.Column="0"
+                         x:Name="btnSignin"
+                         Clicked="btnSignin_Clicked"/>
+                <Button Text="Register"
+                         BackgroundColor="#5B8CFF"
+                         WidthRequest="85"
+                         HeightRequest="20"
+                         Grid.Column="1"
+                         x:Name="btnRegister"
+                         Clicked="btnRegister_Clicked"/>
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

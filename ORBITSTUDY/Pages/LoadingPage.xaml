@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             x:Class="ORBITSTUDY.Pages.LoadingPage"
+             Title="LoadingPage"
+             Shell.TitleColor="Transparent"
+             Shell.BackgroundColor="#080B14"
+             BackgroundColor="#080B14">
+
+    <VerticalStackLayout
+        VerticalOptions="Center"
+        HorizontalOptions="Center">
+
+        <skia:SKLottieView
+            Source="loader_animation.json"
+            RepeatCount="-1"
+            HeightRequest="150"
+            WidthRequest="150"
+            HorizontalOptions="Center"/>
+        <ProgressBar x:Name="LoadingProgressBar"
+                     Progress="0"
+                     ProgressColor="#5B8CFF"
+                     HeightRequest="8"
+                     WidthRequest="200"
+                     HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>
