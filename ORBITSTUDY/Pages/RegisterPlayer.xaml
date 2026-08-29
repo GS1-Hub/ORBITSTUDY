@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ORBITSTUDY.Pages.RegisterPlayer">
+
+    <Grid BackgroundColor="#080B14" 
+          Padding="24" 
+          WidthRequest="380">
+
+        <VerticalStackLayout Spacing="20">
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Create Account"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+                <Label Text="Join ORBIT to start studying"          
+                       FontSize="13"
+                       TextColor="#8E99AF"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="14">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Username"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="#5B8CFF"/>
+                    <Border BackgroundColor="#0D1322"
+                            Stroke="#1F293D"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12"
+                            Padding="12,4">
+                        <Entry Placeholder="Enter your username"
+                               PlaceholderColor="#4B5563"
+                               TextColor="White"
+                               FontSize="14"
+                               BackgroundColor="Transparent"
+                               Text="{Binding Username}"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Email"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="#5B8CFF"/>
+                    <Border BackgroundColor="#0D1322"
+                            Stroke="#1F293D"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12"
+                            Padding="12,4">
+                        <Entry Placeholder="Enter your email"
+                               PlaceholderColor="#4B5563"
+                               TextColor="White"
+                               FontSize="14"
+                               Keyboard="Email"
+                               BackgroundColor="Transparent"
+                               Text="{Binding Email}"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Password"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="#5B8CFF"/>
+                    <Border BackgroundColor="#0D1322"
+                            Stroke="#1F293D"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12"
+                            Padding="12,4">
+                        <Entry Placeholder="Enter your password"
+                               PlaceholderColor="#4B5563"
+                               TextColor="White"
+                               FontSize="14"
+                               IsPassword="True"
+                               BackgroundColor="Transparent"
+                               Text="{Binding Password}"/>
+                    </Border>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="10" Margin="0,8,0,0">
+                <Button Text="Register"
+                        BackgroundColor="#5B8CFF"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="12"
+                        HeightRequest="48"
+                        Clicked="OnGuardarClicked"/>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </Grid>
+</mct:Popup>

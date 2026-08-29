@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using ORBITSTUDY.Database;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace ORBITSTUDY
@@ -8,6 +9,8 @@ namespace ORBITSTUDY
     {
         public static MauiApp CreateMauiApp()
         {
+            SQLitePCL.Batteries_V2.Init();
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -23,6 +26,8 @@ namespace ORBITSTUDY
                     fonts.AddFont("SpaceGrotesk-Regular", "SpaceGroteskRegular");
                     fonts.AddFont("SpaceGrotesk-SemiBold", "SpaceGroteskSemiBold");
                 });
+
+            builder.Services.AddSingleton<DataBaseService>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
