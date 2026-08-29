@@ -5,8 +5,8 @@
              xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="ORBITSTUDY.Pages.LoadingPage"
              Title="LoadingPage"
-             Shell.TitleColor="Transparent"
-             Shell.BackgroundColor="#080B14"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
              BackgroundColor="#080B14">
 
     <VerticalStackLayout
