@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="ORBITSTUDY.Pages.HomePage"
              Title="HomePage"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled"
              BackgroundColor="#080B14">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <Grid HorizontalOptions="Fill"
+          RowDefinitions="Auto,Auto,Auto"
+          Margin="14">
+
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*, Auto"
+              ColumnSpacing="20">
+
+            <VerticalStackLayout Grid.Column="0" 
+                                 HorizontalOptions="Start" 
+                                 Spacing="4">
+                <Label Text="XP"
+                       TextColor="DodgerBlue"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Start"/>
+                <ProgressBar Progress="1"
+                             WidthRequest="250"
+                             HeightRequest="6"
+                             ProgressColor="DodgerBlue"/>
+            </VerticalStackLayout>
+
+            <ImageButton Grid.Column="1"
+                         x:Name="btnSettings"
+                         Source="settings_icon.png"
+                         HorizontalOptions="End"
+                         VerticalOptions="Center"
+                         Clicked="btnSettings_Clicked"/>
+        </Grid>
+
+    </Grid>
 </ContentPage>

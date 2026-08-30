@@ -2,7 +2,6 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Extensions;
 using ORBITSTUDY.Database;
 using ORBITSTUDY.Helpers;
-using ORBITSTUDY.Models;
 
 namespace ORBITSTUDY.Pages;
 
@@ -10,14 +9,34 @@ public partial class Login : ContentPage
 {
     private readonly DataBaseService _dbService;
     public Login()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         _dbService = new DataBaseService();
-	}
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        var savedUsername = Preferences.Get("username", string.Empty);
+        var savedPassword = Preferences.Get("password", string.Empty);
+
+        if (savedUsername.Length > 0 && savedPassword.Length > 0)
+        {
+            bool AutoLogin = await _dbService.Login(savedUsername, savedPassword);
+            if (AutoLogin)
+            {
+                await Shell.Current.GoToAsync(nameof(LoadingPage));
+            }
+            else
+            {
+                return;
+            }
+        }
+    }
 
     private async void btnSignin_Clicked(object sender, EventArgs e)
     {
-        if(string.IsNullOrEmpty(txt_username.Text) || string.IsNullOrEmpty(txt_password.Text))
+        if (string.IsNullOrEmpty(txt_username.Text) || string.IsNullOrEmpty(txt_password.Text))
         {
             await ToastHelper.MakeToast("Oops! Something is missing", ToastDuration.Short, 14);
             return;
@@ -28,6 +47,8 @@ public partial class Login : ContentPage
         if (isValid)
         {
             await Shell.Current.GoToAsync(nameof(LoadingPage));
+            Preferences.Set("username", txt_username.Text);
+            Preferences.Set("password", txt_password.Text);
         }
         else
         {
