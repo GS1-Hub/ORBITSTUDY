@@ -18,6 +18,7 @@ public partial class Login : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+
         var savedUsername = Preferences.Get("username", string.Empty);
         var savedPassword = Preferences.Get("password", string.Empty);
 

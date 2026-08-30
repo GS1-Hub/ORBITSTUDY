@@ -1,10 +1,20 @@
+using ORBITSTUDY.Models;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
+using System.ComponentModel;
+using static ORBITSTUDY.Models.PlanetData;
 
 namespace ORBITSTUDY.Pages;
 
-public partial class FocusSessionPage : ContentPage
+public partial class FocusSessionPage : ContentPage, INotifyPropertyChanged
 {
+    private string? _currentPlanetIcon;
+
+    public string? CurrentPlanetIcon
+    {
+        get => _currentPlanetIcon;
+        set { _currentPlanetIcon = value; OnPropertyChanged(); }
+    }
     private class Star
     {
         public float X { get; set; }
@@ -20,10 +30,36 @@ public partial class FocusSessionPage : ContentPage
     private bool _isSessionActive;
     private Random _random = new();
 
-    public FocusSessionPage()
+    public FocusSessionPage() 
     {
         InitializeComponent();
+
+        BindingContext = this;
+
         InitStars();
+        LoadCurrentPlanet();
+    }
+
+    private void LoadCurrentPlanet()
+    {
+
+        string playerLvl = Preferences.Get("lvl", "NOOB");
+        var planet = PlanetData.GameProgress.Planets.FirstOrDefault(p => p.LvlRequired.Equals(playerLvl, StringComparison.OrdinalIgnoreCase));
+        try
+        {
+            if (planet != null)
+            {
+                CurrentPlanetIcon = planet.Icon;
+            }
+            else
+            {
+                CurrentPlanetIcon = PlanetData.GameProgress.Planets.First().Icon;
+            }
+        }
+        catch
+        {
+            CurrentPlanetIcon = "mercury_icon.png";
+        }
     }
 
     protected override void OnAppearing()
@@ -57,7 +93,7 @@ public partial class FocusSessionPage : ContentPage
     private void StartSpaceFlightAnimation()
     {
         _animationTimer = Dispatcher.CreateTimer();
-        _animationTimer.Interval = TimeSpan.FromMilliseconds(30); // ~33 FPS
+        _animationTimer.Interval = TimeSpan.FromMilliseconds(30);
         _animationTimer.Tick += (s, e) =>
         {
             foreach (var star in _stars)
@@ -131,6 +167,31 @@ public partial class FocusSessionPage : ContentPage
             _focusTimer?.Stop();
             _animationTimer?.Stop();
             await Shell.Current.GoToAsync(nameof(HomePage));
+        }
+    }
+
+    private async void BtnPause_Clicked(object sender, EventArgs e)
+    {
+        bool confirm = await DisplayAlertAsync("Pause Trip?", "Its is going to stop the timer.", "Yes!", "No!");
+
+        if(confirm)
+        {
+            _focusTimer?.Stop();
+            _animationTimer?.Stop();
+            BtnPause.IsVisible = false;
+            BtnContinue.IsVisible = true;
+        }
+    }
+    private async void BtnContinue_Clicked(object sender, EventArgs e)
+    {
+        bool confirm = await DisplayAlertAsync("Continue Trip?", "Its is going to continue the trip.", "Yes!", "No!");
+
+        if(confirm)
+        {
+            _focusTimer?.Start();
+            _animationTimer?.Start();
+            BtnContinue.IsVisible = false;
+            BtnPause.IsVisible = true;
         }
     }
 }

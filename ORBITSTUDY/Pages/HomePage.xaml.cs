@@ -4,14 +4,31 @@ namespace ORBITSTUDY.Pages;
 
 public partial class HomePage : ContentPage
 {
-	public HomePage()
+    private string? _level;
+    public string? Level
+    {
+        get => _level;
+        set
+        {
+            if (_level != value)
+            {
+                _level = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    public HomePage()
 	{
 		InitializeComponent();
+
+        BindingContext = this;
 	}
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+
+        GetPlayerStats();
 
         imgCenter.Opacity = 0;
         imgCenter.TranslationY = 30;
@@ -62,5 +79,10 @@ public partial class HomePage : ContentPage
     private void btnAnchiments_Clicked(object sender, EventArgs e)
     {
 
+    }
+
+    private void GetPlayerStats()
+    {
+        Level = Preferences.Get("lvl", string.Empty);
     }
 }

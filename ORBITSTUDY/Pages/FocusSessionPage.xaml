@@ -17,7 +17,7 @@
             <HorizontalStackLayout Grid.Row="0"
                                    HorizontalOptions="Start"
                                    VerticalOptions="Center">
-                <Button Text="✕ Abortar Viagem"
+                <Button Text="✕ Cancel Trip"
                         TextColor="#FF5555"
                         BackgroundColor="Transparent"
                         FontSize="14"
@@ -30,13 +30,13 @@
                                  HorizontalOptions="Center"
                                  Spacing="20">
 
-                <Image Source="nave_icon.png"
+                <Image Source="{Binding CurrentPlanetIcon}"
                        HeightRequest="140"
                        WidthRequest="140"
                        Aspect="AspectFit"
                        HorizontalOptions="Center"/>
 
-                <Label Text="A navegar pelo hiperespaço..."
+                <Label Text="Enjoy your trip while you study..."
                        TextColor="#8A99AD"
                        FontSize="16"
                        HorizontalTextAlignment="Center"/>
@@ -51,14 +51,37 @@
 
             <VerticalStackLayout Grid.Row="2"
                                  Spacing="10">
-                <Button x:Name="BtnFinish"
-                        Text="Chegar ao Destino (Terminar)"
-                        TextColor="White"
-                        BackgroundColor="DodgerBlue"
-                        HeightRequest="50"
-                        CornerRadius="25"
-                        FontAttributes="Bold"
-                        Clicked="BtnFinish_Clicked"/>
+                <Grid ColumnDefinitions="*, *"
+                      ColumnSpacing="20">
+                    <Button x:Name="BtnFinish"
+                            Grid.Column="0"
+                            Text="Rest"
+                            TextColor="White"
+                            BackgroundColor="#1A2238"
+                            HeightRequest="50"
+                            CornerRadius="25"
+                            FontAttributes="Bold"
+                            Clicked="BtnFinish_Clicked"/>
+                    <Button x:Name="BtnPause"
+                            Grid.Column="1"
+                            Text="Pause Trip"
+                            TextColor="White"
+                            BackgroundColor="#1A2238"
+                            HeightRequest="50"
+                            CornerRadius="25"
+                            FontAttributes="Bold"
+                            Clicked="BtnPause_Clicked"/>
+                    <Button x:Name="BtnContinue"
+                            Grid.Column="1"
+                            Text="Continue Trip"
+                            TextColor="White"
+                            BackgroundColor="#1A2238"
+                            HeightRequest="50"
+                            CornerRadius="25"
+                            FontAttributes="Bold"
+                            IsVisible="False"
+                            Clicked="BtnContinue_Clicked"/>
+                </Grid>
             </VerticalStackLayout>
 
         </Grid>

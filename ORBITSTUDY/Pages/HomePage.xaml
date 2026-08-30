@@ -20,12 +20,12 @@
                                  Spacing="6"
                                  VerticalOptions="Center">
                 <Grid>
-                    <Label Text="PROGRESSO"
+                    <Label Text="XP"
                            TextColor="#8A99AD"
                            FontSize="11"
                            FontAttributes="Bold"
                            HorizontalOptions="Start"/>
-                    <Label Text="{Binding Level, StringFormat='Nível {0}'}"
+                    <Label Text="{Binding Level, StringFormat='Level {0}'}"
                            FontSize="11"
                            TextColor="LightYellow"
                            FontAttributes="Bold"

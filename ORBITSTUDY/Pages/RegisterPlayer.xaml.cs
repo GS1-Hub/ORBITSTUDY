@@ -47,6 +47,9 @@ public partial class RegisterPlayer : Popup
         await _db.CreatePlayer(newPlayer);
         await _db.CreatePlayerStats(newPlayer.Id);
 
+        var playerlvl = await _db.GetPlayerStats(newPlayer.Id);
+        Preferences.Set("lvl", playerlvl?.LVL);
+
         IsRegistered = true;
         await CloseAsync();
     }

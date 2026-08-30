@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using ORBITSTUDY.Models;
+using System.Security.Cryptography;
 
 namespace ORBITSTUDY.Database
 {
@@ -37,6 +38,29 @@ namespace ORBITSTUDY.Database
                         xp INTEGER NOT NULL,
                         lvl TEXT NOT NULL)";
                 cmd.ExecuteNonQuery();
+            });
+        }
+
+        public Task<PlayerStats?> GetPlayerStats(int id)
+        {
+            return Task.Run(() =>
+            {
+                using var conn = new SqliteConnection(_connectionString);
+                conn.Open();
+                using var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM PlayerStats WHERE player_id = @id";
+                cmd.Parameters.AddWithValue("id", id);
+
+                using var reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    return new PlayerStats
+                    {
+                        LVL = reader.GetString(reader.GetOrdinal("lvl"))
+                    };
+                }
+                return null;
             });
         }
         public Task<int> CreatePlayer(Player player)
