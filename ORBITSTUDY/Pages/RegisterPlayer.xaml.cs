@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Views;
+using Microsoft.Maui.Controls.Shapes;
 using ORBITSTUDY.Database;
 using ORBITSTUDY.Helpers;
 using ORBITSTUDY.Models;

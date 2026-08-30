@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Extensions;
 using ORBITSTUDY.Database;
@@ -61,7 +62,12 @@ public partial class Login : ContentPage
     {
         var popup = new RegisterPlayer();
 
-        await this.ShowPopupAsync(popup);
+        await this.ShowPopupAsync(popup, new PopupOptions
+        {
+            Shape = null,
+            Shadow = null,
+            PageOverlayColor = Color.FromArgb("#080B14")
+        });
 
         if (popup.IsRegistered)
             await ToastHelper.MakeToast("Great! You are a player now", ToastDuration.Long, 14);

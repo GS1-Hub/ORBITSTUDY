@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="ORBITSTUDY.Pages.RegisterPlayer">
+<mct:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="ORBITSTUDY.Pages.RegisterPlayer"
+    BackgroundColor="#080B14"
+    WidthRequest="340"
+    HorizontalOptions="Center"
+    VerticalOptions="Center">
 
-    <Grid BackgroundColor="#080B14" 
-          Padding="24" 
-          WidthRequest="380">
+
+    <Grid
+        BackgroundColor="#080B14"
+        Padding="24">
 
         <VerticalStackLayout Spacing="20">
 
