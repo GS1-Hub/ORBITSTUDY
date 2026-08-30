@@ -1,91 +1,109 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="ORBITSTUDY.Pages.HomePage"
              Title="HomePage"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled"
              BackgroundColor="#080B14">
 
-    <Grid HorizontalOptions="Fill"
-          RowDefinitions="Auto,*,Auto"
-          Margin="14">
+    <Grid RowDefinitions="Auto, *, Auto"
+          RowSpacing="20"
+          Margin="20">
 
         <Grid Grid.Row="0"
               ColumnDefinitions="*, Auto"
-              ColumnSpacing="20">
+              ColumnSpacing="15"
+              VerticalOptions="Center">
 
             <VerticalStackLayout Grid.Column="0" 
-                                 HorizontalOptions="Start" 
-                                 Spacing="4"
+                                 Spacing="6"
                                  VerticalOptions="Center">
-                <Label Text="XP"
-                       TextColor="DodgerBlue"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Start"/>
-                <ProgressBar Progress="1"
-                             WidthRequest="250"
-                             HeightRequest="6"
-                             ProgressColor="DodgerBlue"/>
-                <Label Text="{Binding Level}"
-                       FontSize="10"
-                       TextColor="LightYellow"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Start"/>
+                <Grid>
+                    <Label Text="PROGRESSO"
+                           TextColor="#8A99AD"
+                           FontSize="11"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Start"/>
+                    <Label Text="{Binding Level, StringFormat='Nível {0}'}"
+                           FontSize="11"
+                           TextColor="LightYellow"
+                           FontAttributes="Bold"
+                           HorizontalOptions="End"/>
+                </Grid>
+
+                <ProgressBar Progress="{Binding XpProgress}"
+                             HeightRequest="8"
+                             ProgressColor="DodgerBlue"
+                             BackgroundColor="#1A2238"/>
             </VerticalStackLayout>
 
             <ImageButton Grid.Column="1"
                          x:Name="btnSettings"
                          Source="settings_icon.png"
-                         HorizontalOptions="End"
+                         HeightRequest="36"
+                         WidthRequest="36"
+                         BackgroundColor="#1A2238"
+                         CornerRadius="18"
+                         Padding="8"
                          VerticalOptions="Center"
-                         Clicked="btnSettings_Clicked"
-                         CornerRadius="9"/>
+                         Clicked="btnSettings_Clicked"/>
         </Grid>
 
-        <Grid Grid.Row="1"
-          HorizontalOptions="Center"
-          VerticalOptions="Center">
-
-            <Image Source="orbit_semfundo.png"
-           HorizontalOptions="Center"
-           VerticalOptions="Start"/>
-
-            <Label Text="ORBIT"
-                   FontSize="50"
-                   FontAttributes="Bold"
-                   TextColor="#5B8CFF"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Start"
-                   ZIndex="1"
-                   Margin="0,10,0,0"/>
-
-        </Grid>
-        <Grid   ColumnDefinitions="*,*,*"
-                HeightRequest="60"
-                Grid.Row="2">
-            <ImageButton Source="trophy_icon.png"
-                 Grid.Column="0"
-                 x:Name="btnAnchiments"
-                 HorizontalOptions="Center"
-                 HeightRequest="20"
-                 CornerRadius="20"
-                 Clicked="btnAnchiments_Clicked"/>
-            <ImageButton Source="play_icon.png"
-                             Grid.Column="1"
-                             x:Name="btnStart"
+        <VerticalStackLayout Grid.Row="1"
+                             VerticalOptions="Center"
                              HorizontalOptions="Center"
-                             HeightRequest="20"
-                             CornerRadius="20"
-                             Clicked="btnStart_Clicked"/>
+                             Spacing="15">
+            <Image Source="nave_icon.png"
+                   x:Name="imgCenter"
+                   HeightRequest="220"
+                   WidthRequest="220"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="2"
+              ColumnDefinitions="*, 1.2*, *"
+              ColumnSpacing="15"
+              HeightRequest="70"
+              VerticalOptions="Center">
+
+            <ImageButton Source="trophy_icon.png"
+                         Grid.Column="0"
+                         x:Name="btnAnchiments"
+                         BackgroundColor="#161C2E"
+                         HeightRequest="55"
+                         WidthRequest="55"
+                         CornerRadius="28"
+                         Padding="15"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Clicked="btnAnchiments_Clicked"/>
+
+            <ImageButton Source="play_icon.png"
+             Grid.Column="1"
+             x:Name="btnStart"
+             BackgroundColor="White"
+             HeightRequest="65"
+             WidthRequest="65"
+             CornerRadius="32"
+             Padding="18"
+             HorizontalOptions="Center"
+             VerticalOptions="Center"
+             Clicked="btnStart_Clicked"/>
+
             <ImageButton Source="info_icon.png"
+                         Grid.Column="2"
                          x:Name="btnInfo"
-                          Grid.Column="2"
-                          HorizontalOptions="Center"
-                          HeightRequest="20"
-                          CornerRadius="20"
+                         BackgroundColor="#161C2E"
+                         HeightRequest="55"
+                         WidthRequest="55"
+                         CornerRadius="28"
+                         Padding="15"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
                          Clicked="btnInfo_Clicked"/>
         </Grid>
+
     </Grid>
 </ContentPage>
