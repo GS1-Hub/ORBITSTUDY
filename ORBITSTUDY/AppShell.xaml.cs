@@ -9,6 +9,7 @@ namespace ORBITSTUDY
             InitializeComponent();
             Routing.RegisterRoute(nameof(LoadingPage), typeof(LoadingPage));
             Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
+            Routing.RegisterRoute(nameof(FocusSessionPage), typeof(FocusSessionPage));
         }
     }
 }

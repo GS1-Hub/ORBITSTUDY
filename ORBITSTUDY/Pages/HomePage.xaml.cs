@@ -39,9 +39,19 @@ public partial class HomePage : ContentPage
 		await btn.PlayPressAnimation();
     }
 
-    private void btnStart_Clicked(object sender, EventArgs e)
+    private async void btnStart_Clicked(object sender, EventArgs e)
     {
+        await btnStart.ScaleToAsync(0.9, 50, Easing.CubicOut);
+        await btnStart.ScaleToAsync(1.0, 50, Easing.CubicIn);
 
+        await Task.WhenAll(
+            imgCenter.ScaleToAsync(15, 500, Easing.CubicIn),
+            this.FadeToAsync(0, 400, Easing.CubicOut));
+
+        await Shell.Current.GoToAsync(nameof(FocusSessionPage));
+
+        imgCenter.Scale = 1;
+        this.Opacity = 1;
     }
 
     private void btnInfo_Clicked(object sender, EventArgs e)

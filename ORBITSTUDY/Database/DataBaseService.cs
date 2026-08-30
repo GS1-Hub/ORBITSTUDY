@@ -30,7 +30,12 @@ namespace ORBITSTUDY.Database
                         username TEXT NOT NULL,
                         password TEXT NOT NULL, 
                         email TEXT NOT NULL
-            );";
+                    );
+                    CREATE TABLE IF NOT EXISTS PLayerStats (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        player_id INTEGER NOT NULL UNIQUE,
+                        xp INTEGER NOT NULL,
+                        lvl TEXT NOT NULL)";
                 cmd.ExecuteNonQuery();
             });
         }
@@ -50,7 +55,20 @@ namespace ORBITSTUDY.Database
                 return cmd.ExecuteNonQuery();
             });
         }
-
+        public Task<int> CreatePlayerStats(int id)
+        {
+            return Task.Run(() =>
+            {
+                using var conn = new SqliteConnection(_connectionString);
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO PLayerStats (player_id, xp, lvl) VALUES (@player_id, @xp, @lvl);";
+                cmd.Parameters.AddWithValue("@player_id", id);
+                cmd.Parameters.AddWithValue("@xp", 0);
+                cmd.Parameters.AddWithValue("@lvl", "NOOB");
+                return cmd.ExecuteNonQuery();
+            });
+        }
         public Task<bool> Login(string username, string password)
         {
             return Task.Run(() =>
@@ -68,6 +86,20 @@ namespace ORBITSTUDY.Database
 
                 return count > 0;
             });
+        }
+        public async Task ClearPlayersAsync()
+        {
+            using var conn = new SqliteConnection(_connectionString);
+            await conn.OpenAsync();
+
+            using var cmd = conn.CreateCommand();
+
+            cmd.CommandText = @"
+                DELETE FROM PlayerStats;
+                DELETE FROM Players;
+            ";
+
+            await cmd.ExecuteNonQueryAsync();
         }
     }
 }
