@@ -33,6 +33,7 @@
                 </Grid>
 
                 <ProgressBar Progress="{Binding XpProgress}"
+                             x:Name="xpprogress"
                              HeightRequest="8"
                              ProgressColor="DodgerBlue"
                              BackgroundColor="#1A2238"/>
@@ -47,6 +48,7 @@
                          CornerRadius="18"
                          Padding="8"
                          VerticalOptions="Center"
+                         IsVisible="False"
                          Clicked="btnSettings_Clicked"/>
         </Grid>
 
@@ -78,6 +80,7 @@
                          Padding="15"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
+                         IsVisible="False"
                          Clicked="btnAnchiments_Clicked"/>
 
             <ImageButton Source="play_icon.png"
@@ -100,6 +103,7 @@
                          WidthRequest="55"
                          CornerRadius="28"
                          Padding="15"
+                         IsVisible="False"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
                          Clicked="btnInfo_Clicked"/>

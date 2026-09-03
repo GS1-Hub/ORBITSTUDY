@@ -5,6 +5,7 @@ namespace ORBITSTUDY.Pages;
 public partial class HomePage : ContentPage
 {
     private string? _level;
+
     public string? Level
     {
         get => _level;
@@ -17,12 +18,28 @@ public partial class HomePage : ContentPage
             }
         }
     }
+
+    private double _xpProgress;
+
+    public double XpProgress
+    {
+        get => _xpProgress;
+        set
+        {
+            if (_xpProgress != value)
+            {
+                _xpProgress = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public HomePage()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         BindingContext = this;
-	}
+    }
 
     protected override async void OnAppearing()
     {
@@ -51,9 +68,9 @@ public partial class HomePage : ContentPage
 
     private async void btnSettings_Clicked(object sender, EventArgs e)
     {
-		var btn = (ImageButton)sender;
+        var btn = (ImageButton)sender;
 
-		await btn.PlayPressAnimation();
+        await btn.PlayPressAnimation();
     }
 
     private async void btnStart_Clicked(object sender, EventArgs e)
@@ -73,16 +90,44 @@ public partial class HomePage : ContentPage
 
     private void btnInfo_Clicked(object sender, EventArgs e)
     {
-
     }
 
     private void btnAnchiments_Clicked(object sender, EventArgs e)
     {
-
     }
 
     private void GetPlayerStats()
     {
-        Level = Preferences.Get("lvl", string.Empty);
+        Level = Preferences.Get("lvl", "NOOB");
+
+        int xp = Preferences.Get("xp", 0);
+
+        switch (Level)
+        {
+            case "NOOB":
+                XpProgress = (double)xp / 100;
+                break;
+
+            case "STUDENT":
+                XpProgress = (double)(xp - 100) / 150;
+                break;
+
+            case "ADVANCED":
+                XpProgress = (double)(xp - 250) / 250;
+                break;
+
+            case "PRO":
+                XpProgress = (double)(xp - 500) / 500;
+                break;
+
+            case "MASTER":
+                XpProgress = 1;
+                break;
+
+            default:
+                XpProgress = 0;
+                break;
+        }
+        XpProgress = Math.Clamp(XpProgress, 0, 1);
     }
 }

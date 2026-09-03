@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using ORBITSTUDY.Models;
+using System.ComponentModel;
 using System.Security.Cryptography;
 
 namespace ORBITSTUDY.Database
@@ -57,6 +58,7 @@ namespace ORBITSTUDY.Database
                 {
                     return new PlayerStats
                     {
+                        XP = reader.GetInt32(reader.GetOrdinal("lvl")),
                         LVL = reader.GetString(reader.GetOrdinal("lvl"))
                     };
                 }
@@ -124,6 +126,23 @@ namespace ORBITSTUDY.Database
             ";
 
             await cmd.ExecuteNonQueryAsync();
+        }
+
+        public async Task<bool> UpdatePlayerStats(PlayerStats stats)
+        {
+            using var conn = new SqliteConnection(_connectionString);
+            conn.Open();
+
+            using var cmd = conn.CreateCommand();
+
+            cmd.CommandText = $"UPDATE PLayerStats SET xp = @xp , lvl= @lvl where player_id = @player_id";
+            cmd.Parameters.AddWithValue("xp", stats.XP);
+            cmd.Parameters.AddWithValue("lvl", stats.LVL);
+            cmd.Parameters.AddWithValue("player_id", stats.Player_id);
+
+            int result = await cmd.ExecuteNonQueryAsync();
+
+            return result > 0;
         }
     }
 }
